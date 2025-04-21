@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>更多分類 - 新聞聚合平台</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Add Font Awesome for icons (example) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 服務器啟動提示 -->
+    <div id="server-warning" style="position: fixed; top: 0; left: 0; right: 0; background-color: #ff6b6b; color: white; padding: 10px; text-align: center; z-index: 9999; display: none;">
+        <strong>警告:</strong> 代理服務器未啟動! 請在命令行中執行: <code>node proxy-server.js</code>
+        <button onclick="this.parentNode.style.display='none'" style="margin-left: 15px; border: none; background: white; color: #ff6b6b; padding: 2px 8px; border-radius: 4px; cursor: pointer;">關閉</button>
+    </div>
+
+    <!-- Background element to see the blur effect -->
+    <div class="background-image" style="background-image: url('LA.jpg');"></div>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <ul>
+                <li><a href="#"><i class="fas fa-home"></i></a></li>
+                <li><a href="#"><i class="fas fa-heart"></i></a></li>
+                <li><a href="#"><i class="fas fa-download"></i></a></li>
+                <li><a href="#"><i class="fas fa-user"></i></a></li>
+                <li><a href="#"><i class="fas fa-cog"></i></a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header class="app-header">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="搜尋新聞">
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">焦點</a></li>
+                        <li><a href="tech.html">科技</a></li>
+                        <li><a href="local.html">國內</a></li>
+                        <li><a href="international.html">國際</a></li>
+                        <li><a href="more.html" class="active">更多</a></li>
+                    </ul>
+                </nav>
+                <div class="user-area">
+                    <button class="icon-button"><i class="fas fa-bell"></i></button>
+                    <div class="user-profile">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='30' height='30'%3E%3Ccircle fill='%23ccc' cx='12' cy='12' r='12'/%3E%3Ccircle fill='%23999' cx='12' cy='9' r='4'/%3E%3Cpath fill='%23999' d='M4,19 C4,16 7.6,14 12,14 C16.4,14 20,16 20,19 L20,22 L4,22 L4,19 Z'/%3E%3C/svg%3E" alt="User Avatar">
+                        <span>訪客</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <section class="featured-section">
+                    <div class="new-trailer-list">
+                        <h2><i class="fas fa-lightbulb orange"></i> 文化與藝術 <span class="sort-by">排序: 今日 <i class="fas fa-chevron-down"></i></span></h2>
+                        <ul id="culture-news-list">
+                            <!-- 文化與藝術新聞將由JavaScript動態填充 -->
+                            <li class="loading-placeholder news-card-style-item">
+                                <div class="skeleton-overlay-loader">
+                                    <div class="skeleton-title-line"></div>
+                                    <div class="skeleton-subtitle-line"></div>
+                                </div>
+                            </li>
+                            <li class="loading-placeholder news-card-style-item">
+                                <div class="skeleton-overlay-loader">
+                                    <div class="skeleton-title-line"></div>
+                                    <div class="skeleton-subtitle-line"></div>
+                                </div>
+                            </li>
+                            <li class="loading-placeholder news-card-style-item">
+                                <div class="skeleton-overlay-loader">
+                                    <div class="skeleton-title-line"></div>
+                                    <div class="skeleton-subtitle-line"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="now-trending">
+                         <div id="featured-culture-news" class="trending-content">
+                            <!-- 焦點文化藝術新聞將由JavaScript動態填充 -->
+                            <div class="skeleton-loader featured-loader"></div>
+                            <div class="trending-info">
+                                <div class="genres">
+                                    <div class="skeleton-loader skeleton-tag"></div>
+                                    <div class="skeleton-loader skeleton-tag"></div>
+                                </div>
+                                <div class="skeleton-loader skeleton-headline"></div>
+                                <div class="skeleton-loader skeleton-paragraph"></div>
+                                <div class="actions">
+                                    <button class="btn btn-primary"><i class="fas fa-book-open"></i> 閱讀</button>
+                                    <button class="btn btn-secondary"><i class="fas fa-share"></i> 分享</button>
+                                    <button class="btn btn-secondary icon-only"><i class="fas fa-ellipsis-h"></i></button>
+                                </div>
+                            </div>
+                         </div>
+                    </div>
+                </section>
+
+                <section class="recommendation-section">
+                     <div class="continue-watching">
+                        <h2><i class="fas fa-heartbeat blue"></i> 健康與生活</h2>
+                        <ul id="health-news-list">
+                            <!-- 健康與生活新聞將由JavaScript動態填充 -->
+                            <li class="loading-placeholder news-card-style-item">
+                                <div class="skeleton-overlay-loader">
+                                    <div class="skeleton-title-line"></div>
+                                    <div class="skeleton-subtitle-line"></div>
+                                </div>
+                            </li>
+                            <li class="loading-placeholder news-card-style-item">
+                                <div class="skeleton-overlay-loader">
+                                    <div class="skeleton-title-line"></div>
+                                    <div class="skeleton-subtitle-line"></div>
+                                </div>
+                            </li>
+                            <li class="loading-placeholder news-card-style-item">
+                                <div class="skeleton-overlay-loader">
+                                    <div class="skeleton-title-line"></div>
+                                    <div class="skeleton-subtitle-line"></div>
+                                </div>
+                            </li>
+                            <li class="loading-placeholder news-card-style-item">
+                                <div class="skeleton-overlay-loader">
+                                    <div class="skeleton-title-line"></div>
+                                    <div class="skeleton-subtitle-line"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="you-might-like">
+                        <div class="section-header">
+                            <h2><i class="fas fa-futbol green"></i> 體育新聞</h2>
+                            <a href="#" class="see-all">查看全部</a>
+                        </div>
+                        <div id="sports-news-grid" class="card-grid">
+                            <!-- 體育新聞將由JavaScript動態填充 -->
+                            <div class="movie-card loading-placeholder">
+                                <div class="skeleton-loader card-loader"></div>
+                                <div class="card-info">
+                                    <div class="skeleton-loader skeleton-title"></div>
+                                    <div class="skeleton-loader skeleton-subtitle"></div>
+                                </div>
+                            </div>
+                            <div class="movie-card loading-placeholder">
+                                <div class="skeleton-loader card-loader"></div>
+                                <div class="card-info">
+                                    <div class="skeleton-loader skeleton-title"></div>
+                                    <div class="skeleton-loader skeleton-subtitle"></div>
+                                </div>
+                            </div>
+                            <div class="movie-card loading-placeholder">
+                                <div class="skeleton-loader card-loader"></div>
+                                <div class="card-info">
+                                    <div class="skeleton-loader skeleton-title"></div>
+                                    <div class="skeleton-loader skeleton-subtitle"></div>
+                                </div>
+                            </div>
+                            <div class="movie-card loading-placeholder">
+                                <div class="skeleton-loader card-loader"></div>
+                                <div class="card-info">
+                                    <div class="skeleton-loader skeleton-title"></div>
+                                    <div class="skeleton-loader skeleton-subtitle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- 加載新聞數據的JavaScript -->
+    <script type="module" src="news-fetcher.js"></script>
+    <script type="module" src="ui-controller.js"></script>
+    <script>
+        // 檢測代理服務器狀態
+        async function checkServerStatus() {
+            try {
+                const response = await fetch('http://localhost:3000/fetchRSS?url=test');
+                // 如果不是404，表示服務器在運行
+                if (response.status !== 404) {
+                    document.getElementById('server-warning').style.display = 'none';
+                } else {
+                    document.getElementById('server-warning').style.display = 'block';
+                }
+            } catch (e) {
+                // 如果請求失敗，說明服務器未啟動
+                document.getElementById('server-warning').style.display = 'block';
+            }
+        }
+        
+        // 頁面加載時檢查
+        window.addEventListener('load', checkServerStatus);
+    </script>
+</body>
+</html> 

@@ -1,0 +1,24 @@
+{
+  "name": "news-aggregator",
+  "version": "1.0.0",
+  "description": "基於Google News RSS的新聞聚合平台",
+  "main": "proxy-server.js",
+  "scripts": {
+    "start": "node proxy-server.js",
+    "dev": "node proxy-server.js"
+  },
+  "keywords": [
+    "news",
+    "rss",
+    "google-news",
+    "aggregator"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.8.4",
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}

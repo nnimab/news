@@ -1,0 +1,962 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'); /* Example Font */
+
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.1); /* Adjust alpha for more/less transparency */
+    --blur-amount: 15px; /* Adjust blur intensity */
+    --border-color: rgba(255, 255, 255, 0.2);
+    --text-primary: #E0E0E0;
+    --text-secondary: #A0A0A0;
+    --accent-orange: #FFA500;
+    --accent-purple: #AE70AF; /* Approximation */
+    --button-bg: rgba(255, 255, 255, 0.8);
+    --button-text: #222;
+    --button-secondary-bg: rgba(80, 80, 80, 0.5);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif; /* Use a suitable font */
+    background-color: #333; /* Fallback background */
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px;
+    overflow: hidden; /* Prevent scrollbars from body */
+}
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #444, #111);
+    background-size: cover;
+    filter: blur(10px); /* Blur background behind the app */
+    z-index: -1;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 1200px; /* Adjust as needed */
+    height: 80vh; /* Adjust height */
+    max-height: 700px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--blur-amount));
+    -webkit-backdrop-filter: blur(var(--blur-amount)); /* Safari */
+    border-radius: 25px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    overflow: hidden; /* Important for child elements */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 60px;
+    padding: 20px 0;
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0; /* Prevent sidebar from shrinking */
+}
+
+.sidebar ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Space between icons */
+    align-items: center;
+}
+
+.sidebar ul li a {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    padding: 10px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.sidebar ul li a:hover,
+.sidebar ul li a.active /* Add active class if needed */ {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+}
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevent internal scrolling issues initially */
+}
+
+/* Header */
+.app-header {
+    display: flex;
+    align-items: center;
+    padding: 15px 30px;
+    border-bottom: 1px solid var(--border-color);
+    gap: 20px;
+    flex-shrink: 0; /* Prevent header shrinking */
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: rgba(80, 80, 80, 0.5);
+    padding: 8px 15px;
+    border-radius: 20px;
+    flex-grow: 0.5; /* Adjust width proportion */
+    max-width: 300px;
+}
+
+.search-bar i {
+    color: var(--text-secondary);
+    margin-right: 10px;
+}
+
+.search-bar input {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    width: 100%;
+    font-size: 0.9rem;
+}
+.search-bar input::placeholder {
+    color: var(--text-secondary);
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.main-nav ul li a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 15px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.main-nav ul li a:hover,
+.main-nav ul li a.active {
+    color: var(--text-primary);
+    background-color: rgba(80, 80, 80, 0.7);
+}
+
+.user-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: auto; /* Push to the right */
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 5px;
+}
+.icon-button:hover {
+    color: var(--text-primary);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: rgba(80, 80, 80, 0.5);
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.user-profile img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.user-profile span {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.user-profile i {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+}
+
+/* Content Body */
+.content-body {
+    padding: 20px 30px;
+    flex-grow: 1; /* Take remaining vertical space */
+    overflow-y: auto; /* Allow scrolling for content */
+     /* Custom scrollbar (optional) */
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+    &::-webkit-scrollbar-track {
+        background: rgba(0,0,0,0.1);
+        border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.3);
+        border-radius: 10px;
+    }
+     &::-webkit-scrollbar-thumb:hover {
+        background: rgba(255,255,255,0.5);
+    }
+}
+
+.featured-section {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+/* New Trailer List */
+.new-trailer-list {
+    width: 250px; /* Fixed width */
+    flex-shrink: 0;
+}
+
+.new-trailer-list h2,
+.now-trending h2,
+.continue-watching h2,
+.you-might-like h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.new-trailer-list h2 .orange { color: #FFFFFF; }
+.now-trending h2 .purple { color: var(--accent-purple); }
+
+.sort-by {
+    margin-left: auto;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+    cursor: pointer;
+}
+.sort-by i { font-size: 0.6rem; margin-left: 3px;}
+
+.new-trailer-list ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.new-trailer-list ul li {
+    position: relative; /* Needed for absolute positioning of children */
+    background-color: #444; /* Fallback color */
+    border-radius: 12px; /* Rounded corners for the card */
+    overflow: hidden; /* Ensure image doesn't overflow rounded corners */
+    margin-bottom: 15px; /* Space between cards */
+    height: 150px; /* Fixed height for consistency, adjust as needed */
+    display: block; /* Override flex if it was set */
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.new-trailer-list ul li:hover {
+    transform: scale(1.03); /* Slight zoom effect on hover */
+    /* Remove existing hover background if any */
+    background-color: #444;
+}
+
+/* Style for the image - make it a background */
+.new-trailer-list ul li img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the area, crop if needed */
+    z-index: 1; /* Behind the overlay */
+    border-radius: 0; /* Remove radius if it was set */
+    display: block; /* Ensure it takes block space */
+    margin: 0; /* Remove default margin */
+}
+
+/* Style for the text overlay */
+.trailer-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%); /* Gradient background */
+    padding: 10px 12px;
+    z-index: 2; /* Above the image */
+    color: #fff; /* Ensure text is white */
+    /* Resetting styles that might conflict */
+    width: auto;
+    height: auto;
+    display: block;
+}
+
+/* Adjust text styles within the overlay */
+.trailer-info h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 3px;
+    color: #fff; /* White title */
+}
+
+.trailer-info span {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.8); /* Slightly transparent white for subtitle */
+    display: block; /* Ensure it takes its own line if needed */
+}
+
+/* Now Trending */
+.now-trending {
+    flex-grow: 1; /* Take remaining space */
+    position: relative; /* For absolute positioning inside if needed */
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #222; /* BG for the trending card */
+
+    display: flex;
+    flex-direction: column;
+}
+.trending-content {
+    flex-grow: 1;
+    position: relative; /* Added for absolute positioning of info */
+    overflow: hidden; /* Ensure image stays within bounds */
+    border-radius: 15px; /* Match container rounding */
+    display: flex; /* Use flex to help child fill space */
+}
+
+.trending-backdrop {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 保持圖片比例 */
+    object-position: center; /* 確保圖片居中 */
+    opacity: 0.7; /* Make backdrop slightly dim */
+}
+
+.trending-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 30px;
+    background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.7) 50%, rgba(0,0,0,0)); /* 增強漸變效果 */
+    max-height: 70%; /* 限制信息區域高度 */
+    overflow-y: auto; /* 允許滾動 */
+}
+
+.genres span {
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    margin-right: 5px;
+    display: inline-block; /* Prevent wrapping issues */
+    margin-bottom: 10px;
+}
+
+/* 優化焦點新聞區域 */
+.trending-info h1 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    max-height: none; /* 移除高度限制 */
+}
+
+.trending-info p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    max-height: 100px; /* 限制描述文字高度 */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* 限制顯示行數 */
+    -webkit-box-orient: vertical;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: opacity 0.2s ease;
+}
+.btn:hover { opacity: 0.9; }
+
+.btn-primary {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+}
+
+.btn-secondary {
+    background-color: var(--button-secondary-bg);
+    color: var(--text-primary);
+}
+.btn.icon-only { padding: 10px; }
+
+/* Recommendation Section */
+.recommendation-section {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+/* Continue Watching */
+.continue-watching {
+    width: 250px; /* Match trailer list width */
+    flex-shrink: 0;
+}
+
+.continue-watching ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.continue-watching li {
+    position: relative; /* Needed for absolute positioning of children */
+    background-color: #444; /* Fallback color */
+    border-radius: 12px; /* Rounded corners for the card */
+    overflow: hidden; /* Ensure image doesn't overflow rounded corners */
+    margin-bottom: 15px; /* Space between cards */
+    height: 150px; /* Fixed height for consistency, adjust as needed */
+    display: block; /* Override flex if it was set */
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.continue-watching li img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the area, crop if needed */
+    z-index: 1; /* Behind the overlay */
+    border-radius: 0; /* Remove radius if it was set */
+    display: block; /* Ensure it takes block space */
+    margin: 0; /* Remove default margin */
+}
+
+.continue-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%); /* Gradient background */
+    padding: 10px 12px;
+    z-index: 2; /* Above the image */
+    color: #fff; /* Ensure text is white */
+    /* Resetting styles that might conflict */
+    width: auto;
+    height: auto;
+    display: block;
+}
+
+.continue-info h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 3px;
+    color: #fff; /* White title */
+}
+
+.continue-info span {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.8); /* Slightly transparent white for subtitle */
+    display: block; /* Ensure it takes its own line if needed */
+}
+
+.play-icon-small {
+    position: absolute;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.6rem;
+    margin-left: auto;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+.continue-watching li:hover .play-icon-small {
+    opacity: 1;
+}
+
+/* You Might Like */
+.you-might-like {
+    flex-grow: 1;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px; /* Matches h2 margin */
+}
+
+.see-all {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+.see-all:hover { color: var(--text-primary); }
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* Responsive grid */
+    gap: 20px;
+}
+
+.movie-card {
+    background-color: rgba(80, 80, 80, 0.2); /* Slightly different card bg */
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.movie-card:hover {
+    transform: translateY(-5px);
+}
+
+.movie-card img {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    aspect-ratio: 2 / 3; /* Common movie poster ratio */
+    object-fit: cover;
+    display: block;
+}
+
+.card-info {
+    padding: 10px;
+}
+.card-info h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
+.card-info span { font-size: 0.75rem; color: var(--text-secondary); }
+
+.play-button {
+    position: absolute;
+    bottom: 10px; /* Adjust position */
+    right: 10px;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.movie-card:hover .play-button {
+    opacity: 1;
+}
+
+/* 骨架屏加載效果 */
+.skeleton-loader {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.05) 25%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.05) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  height: 100%;
+  width: 100%;
+}
+
+.skeleton-title {
+  height: 18px;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.skeleton-subtitle {
+  height: 14px;
+  width: 70%;
+}
+
+.skeleton-tag {
+  height: 20px;
+  width: 80px;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.skeleton-headline {
+  height: 36px;
+  width: 100%;
+  margin: 16px 0;
+}
+
+.skeleton-paragraph {
+  height: 80px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.featured-loader {
+  height: 300px;
+  width: 100%;
+  border-radius: 8px;
+}
+
+.local-loader {
+  height: 120px;
+  width: 80px;
+  border-radius: 4px;
+}
+
+.card-loader {
+  height: 250px;
+  width: 180px;
+  border-radius: 8px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* 新聞項目樣式 */
+.news-source {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.news-image {
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.tech-news-image {
+  width: 100px;
+  height: 60px;
+}
+
+.local-news-image {
+  width: 80px;
+  height: 120px;
+}
+
+.featured-news-image {
+  display: block; /* Remove extra space below image */
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cover the container, crop if needed */
+  border-radius: 15px; /* Match container rounding */
+  position: absolute; /* Take up the full space */
+  top: 0;
+  left: 0;
+}
+
+.more-news-image {
+  width: 180px;
+  height: 250px;
+  border-radius: 8px;
+}
+
+.news-time {
+  font-size: 0.75em;
+  color: #999;
+}
+
+.loading-placeholder {
+  opacity: 0.7;
+}
+
+/* 更改按鈕樣式，更適合新聞網站 */
+.btn.btn-primary {
+  background-color: #ffffff;
+  color: #333333;
+  font-weight: 600;
+  border: none;
+  padding: 8px 20px;
+}
+
+.btn.btn-primary:hover {
+  background-color: #f0f0f0;
+}
+
+.read-btn {
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* 閱讀按鈕樣式調整 */
+.read-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: none;
+  color: #333333;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.read-button:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.1);
+}
+
+.read-icon-small {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: none;
+  color: #333333;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.read-icon-small:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* 新聞條目光標樣式 */
+.movie-card, 
+#tech-news-list li, 
+#local-news-list li {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.movie-card:hover, 
+#tech-news-list li:hover, 
+#local-news-list li:hover {
+  transform: translateY(-5px);
+}
+
+/* 優化新聞來源和時間的顯示 */
+.news-source {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Card Style for News List Items */
+.new-trailer-list ul li,
+.continue-watching ul li {
+    position: relative; /* Needed for absolute positioning of children */
+    background-color: #444; /* Fallback color */
+    border-radius: 12px; /* Rounded corners for the card */
+    overflow: hidden; /* Ensure image doesn't overflow rounded corners */
+    margin-bottom: 15px; /* Space between cards */
+    height: 150px; /* Fixed height for consistency, adjust as needed */
+    display: block; /* Override flex if it was set */
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.new-trailer-list ul li:hover,
+.continue-watching ul li:hover {
+    transform: scale(1.03); /* Slight zoom effect on hover */
+    /* Remove existing hover background if any */
+    background-color: #444;
+}
+
+/* Style for the image - make it a background */
+.new-trailer-list ul li img,
+.continue-watching ul li img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the area, crop if needed */
+    z-index: 1; /* Behind the overlay */
+    border-radius: 0; /* Remove radius if it was set */
+    display: block; /* Ensure it takes block space */
+    margin: 0; /* Remove default margin */
+}
+
+/* Style for the text overlay */
+.trailer-info,
+.continue-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%); /* Gradient background */
+    padding: 10px 12px;
+    z-index: 2; /* Above the image */
+    color: #fff; /* Ensure text is white */
+    /* Resetting styles that might conflict */
+    width: auto;
+    height: auto;
+    display: block;
+}
+
+/* Adjust text styles within the overlay */
+.trailer-info h3,
+.continue-info h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 3px;
+    color: #fff; /* White title */
+}
+
+.trailer-info span, /* Includes source and date */
+.continue-info span {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.8); /* Slightly transparent white for subtitle */
+    display: block; /* Ensure it takes its own line if needed */
+}
+
+.play-icon-small {
+    position: absolute;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.6rem;
+    margin-left: auto;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+.continue-watching li:hover .play-icon-small {
+    opacity: 1;
+}
+
+/* Card Loader Adjustments */
+.card-loader { width: 100%; height: 180px; /* Adjust as needed */ border-radius: 10px; margin-bottom: 10px; }
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* --- Skeleton Loader Adjustments for Card Style --- */
+.loading-placeholder.news-card-style-item { /* Add a new class or target existing */
+    position: relative;
+    height: 150px; /* Match card height */
+    background-color: #555; /* Darker background for skeleton */
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    padding: 0; /* Remove padding if any */
+    display: block; /* Ensure block display */
+}
+
+.loading-placeholder.news-card-style-item .skeleton-loader {
+    /* Remove specific skeleton shapes if they conflict */
+    background: linear-gradient(90deg, #555 25%, #666 50%, #555 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 0; /* Reset border radius for inner elements */
+}
+
+/* Skeleton for the overlay area */
+.loading-placeholder.news-card-style-item .skeleton-overlay-loader {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px; /* Approximate height of the overlay */
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Align skeleton lines to bottom */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%); /* Match overlay background */
+}
+
+.loading-placeholder.news-card-style-item .skeleton-title-line {
+    height: 14px; /* Approx title height */
+    width: 80%; /* Shorter line for title */
+    margin-bottom: 5px;
+    background-color: #777; /* Use a distinct color for lines or keep gradient */
+    background: linear-gradient(90deg, #666 25%, #777 50%, #666 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+}
+
+.loading-placeholder.news-card-style-item .skeleton-subtitle-line {
+    height: 10px; /* Approx subtitle height */
+    width: 60%; /* Even shorter line */
+    background-color: #777;
+    background: linear-gradient(90deg, #666 25%, #777 50%, #666 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+}
+
+/* Existing specific image classes */
+.news-source {
+    font-size: 0.8em;
+}
