@@ -1,6 +1,8 @@
 # 更新日誌
 
 ## [Unreleased] - YYYY-MM-DD
+### Added
+- 將本地項目連接到 GitHub 倉庫 `https://github.com/nnimab/news`，並強制推送本地更改覆蓋遠程倉庫。
 ### Fixed
 - 修復不同頁面焦點新聞區塊 (`.now-trending`) 高度不一致的問題。為其添加了固定的 `height: 450px;`，使其不再受相鄰欄位內容高度影響。
 - 修復部分頁面（local, tech, more）焦點新聞區塊圖片無法顯示的問題（因 `src="null"`）。修改加載流程，確保在顯示焦點新聞前為其獲取有效圖片URL。
