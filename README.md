@@ -2,9 +2,10 @@
 
 一個基於Yahoo新聞RSS源的現代化新聞聚合平台，提供多分類新聞展示和優雅的用戶界面。
 
-https://nnimab.me/
+連接: https://nnimab.me/
 
-![image](https://github.com/user-attachments/assets/909afa4e-4faf-45c9-b885-348c18b4aeac)
+![image](https://github.com/user-attachments/assets/8825747b-19ff-4996-8e3b-2242bf5623b6)
+
 
 
 ## 🌟 功能特點
