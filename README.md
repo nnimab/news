@@ -194,25 +194,4 @@ A: 確保通過 `http://localhost:3000` 訪問，而非直接開啟HTML文件
 - [ ] 閱讀統計
 - [ ] 個性化推薦
 
-## 🤝 貢獻指南
 
-歡迎提交Issue和Pull Request！
-
-1. Fork本專案
-2. 創建功能分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 開啟Pull Request
-
-## 📄 授權條款
-
-本專案採用 MIT 授權條款 - 詳見 [LICENSE](LICENSE) 文件
-
-## 📞 聯絡方式
-
-- 專案連結：[https://github.com/nnimab/news](https://github.com/nnimab/news)
-- 問題回報：[Issues](https://github.com/nnimab/news/issues)
-
----
-
-⭐ 如果這個專案對您有幫助，請給我們一個星星！ 
